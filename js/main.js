@@ -25,18 +25,30 @@ const posts = [
 
 // **Milestone 2** - Prendendo come riferimento il layout di esempio presente nell'html, stampiamo i post del nostro feed.
 
+// Creo una variabile per il contenitore HTML.
 let container = document.getElementById("container");
 
+// Per ogni item contenuto nell'array richiamo una funzione che crea un elemento html che poi appendo al contenitore HTML.
 posts.forEach( post => {
     const thisPost = createNewDomElement(post);
     container.append(thisPost);
 });
 
-Array.from(document.getElementsByClassName('js-like-button')).forEach(button => {
-    button.addEventListener('click', function() {
-        console.log(this);
-    })
-})
+// Dopo aver creato gli elementi HTML, posso selezionarli. Seleziono quindi tutti i bottoni del like.
+const likeButtons = document.querySelectorAll('.js-like-button');
+// ...e ad ognuno aggiungo un event listener che aggiunge una classe per colorare il bottone stesso.
+likeButtons.forEach( button => {
+    button.addEventListener('click', function(){
+        this.classList.add("like-button--liked");
+    });    
+});
+
+// Soluzione Adriano
+// Array.from(document.getElementsByClassName('js-like-button')).forEach(button => {
+//     button.addEventListener('click', function() {
+//         console.log(this);
+//     })
+// })
 
 
 // FUNCTIONS
