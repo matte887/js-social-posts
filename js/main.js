@@ -32,7 +32,11 @@ posts.forEach( post => {
     container.append(thisPost);
 });
 
-
+Array.from(document.getElementsByClassName('js-like-button')).forEach(button => {
+    button.addEventListener('click', function() {
+        console.log(this);
+    })
+})
 
 
 // FUNCTIONS
@@ -46,6 +50,7 @@ function createNewDomElement(object) {
 
     const postContainer = document.createElement("div");
     postContainer.classList.add("post");
+
 
     const domElement = `<div class="post__header">
                             <div class="post-meta">                    
@@ -65,7 +70,7 @@ function createNewDomElement(object) {
                         <div class="post__footer">
                             <div class="likes js-likes">
                                 <div class="likes__cta">
-                                    <a class="like-button  js-like-button" onclick="colorLike()" href="#" data-postid="1">
+                                    <a class="like-button  js-like-button" href="#" data-postid="${id}">
                                         <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                                         <span class="like-button__label">Mi Piace</span>
                                     </a>
@@ -75,7 +80,7 @@ function createNewDomElement(object) {
                                 </div>
                             </div> 
                         </div>`;
-                        
+
     postContainer.innerHTML = domElement;
     return postContainer;
 }
