@@ -40,13 +40,16 @@ const likeButtons = document.querySelectorAll(".js-like-button");
 // ...e ad bottone aggiungo un event listener che aggiunge una classe per colorare il bottone stesso.
 likeButtons.forEach( button => {
     button.addEventListener("click", function(){
+        // Coloro il bottone aggiungendo la classe.
         this.classList.add("like-button--liked");
-        console.log(this);
-        posts[this.id]
+
+        // Seleziono l'id del bottone del like per poter cambiare il relativo contatore.
+        const postId = this.dataset.postid;
+        // Seleziono anche il counter con id che contiene lo stesso numero di postId.
+        let counterId = document.getElementById(`like-counter-${postId}`);
+        counterId.textContent = parseInt(counterId.textContent) + 1;
     });    
 });
-
-
 
 // Soluzione Adriano
 // Array.from(document.getElementsByClassName('js-like-button')).forEach(button => {

@@ -123,3 +123,7 @@ h1 {
     color: #0CD977;
     cursor: default;
 }
+
+.js-like-button {
+    /* pointer-events: none; */
+}
