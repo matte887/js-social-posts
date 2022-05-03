@@ -34,14 +34,19 @@ posts.forEach( post => {
     container.append(thisPost);
 });
 
-// Dopo aver creato gli elementi HTML, posso selezionarli. Seleziono quindi tutti i bottoni del like.
-const likeButtons = document.querySelectorAll('.js-like-button');
-// ...e ad ognuno aggiungo un event listener che aggiunge una classe per colorare il bottone stesso.
+// Dopo aver creato gli elementi HTML, posso selezionarli. Seleziono quindi tutti i bottoni del like ed i relativi contatori...
+const likeButtons = document.querySelectorAll(".js-like-button");
+
+// ...e ad bottone aggiungo un event listener che aggiunge una classe per colorare il bottone stesso.
 likeButtons.forEach( button => {
-    button.addEventListener('click', function(){
+    button.addEventListener("click", function(){
         this.classList.add("like-button--liked");
+        console.log(this);
+        posts[this.id]
     });    
 });
+
+
 
 // Soluzione Adriano
 // Array.from(document.getElementsByClassName('js-like-button')).forEach(button => {
@@ -88,7 +93,7 @@ function createNewDomElement(object) {
                                     </a>
                                 </div>
                                 <div class="likes__counter">
-                                    Piace a <b id="like-counter-1" class="js-likes-counter">${likes}</b> persone
+                                    Piace a <b id="like-counter-${id}" class="js-likes-counter">${likes}</b> persone
                                 </div>
                             </div> 
                         </div>`;
