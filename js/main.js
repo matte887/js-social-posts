@@ -68,20 +68,38 @@ posts.forEach( post => {
     container.innerHTML += thisPost;
 });
 
-// Dopo aver creato gli elementi HTML, posso selezionarli. Seleziono quindi tutti i bottoni del like ed i relativi contatori...
+// Dopo aver creato gli elementi HTML, posso selezionarli. Seleziono quindi tutti i bottoni del like ed i relativi contatori (creo anche un array vuoto dove pushare i post piaciuti)...
+const likedPosts = [];
 const likeButtons = document.querySelectorAll(".js-like-button");
 
 // ...e ad bottone aggiungo un event listener che aggiunge una classe per colorare il bottone stesso.
-likeButtons.forEach( button => {
-    button.addEventListener("click", function(){
+likeButtons.forEach( (button, index) => {
+    button.addEventListener("click", function(event){
+        event.preventDefault();
         // Coloro il bottone aggiungendo la classe.
         this.classList.add("like-button--liked");
 
+        // Estraggo l'id dall'oggetto alla posizione index dell'array.
+        const clickedPost = posts[index].id;
+        // Seleziono l'elemento HTML del counter con id corrispondente all'id.
+        const likeCounter = document.getElementById(`like-counter-${clickedPost}`);
+        // Prelevo il contenuto del counter (che è una stringa) e lo strasformo in numero.
+        let likesNumber = parseInt(likeCounter.textContent);
+        // Incremento di uno il contatore.
+        likesNumber++;
+        // Riscrivo il contenuto dell'HTML.
+        likeCounter.innerHTML = likesNumber
+
+        // Salvo i post a cui è stato dato like in un array.
+        likedPosts.push(clickedPost);
+        console.log(likedPosts);
+
+        // METODO CON dataset (CHE NON ABBIAMO FATTO) PER ESTRARRE L'ID
         // Seleziono l'id del bottone del like per poter cambiare il relativo contatore.
-        const postId = this.dataset.postid;
+        // const postId = this.dataset.postid;
         // Seleziono anche il counter con id che contiene lo stesso numero di postId.
-        let counterId = document.getElementById(`like-counter-${postId}`);
-        counterId.textContent = parseInt(counterId.textContent) + 1;
+        // let counterId = document.getElementById(`like-counter-${postId}`);
+        // counterId.textContent = parseInt(counterId.textContent) + 1;
     });    
 });
 
