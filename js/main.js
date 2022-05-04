@@ -127,7 +127,7 @@ function createNewDomElement(object) {
                             <div class="post__header">
                                 <div class="post-meta">                    
                                     <div class="post-meta__icon">
-                                        <img class="profile-pic" src="${author.image}" alt="${author.name}">                    
+                                        ${ (author.image ? createAuthorImage(author) : createPlaceholderAuthorImage(author.name))}                    
                                     </div>
                                     <div class="post-meta__data">
                                         <div class="post-meta__author">${author.name}</div>
@@ -175,4 +175,39 @@ function formatDate(originalDate) {
     const italianDateString = originalDate.split("-").reverse().join("/");
     
     return italianDateString;
+}
+
+/**
+ * Description: Restituisce l'elemento dell'immagine in base ai dati passati.
+ * @param {Object} authorObject -> oggetto con i dati dell'autore.
+ * @returns {String} -> restituisce una template string con l'immagine dell'autore.
+ */
+function createAuthorImage(authorObject) {
+    const {image, name} = authorObject;
+    const authorImage = `<img class="profile-pic" src="${image}" alt="${name}">`;
+    return authorImage;
+}
+
+// Restituisce l'elemento di placeholder
+function createPlaceholderAuthorImage(authorName) {
+    console.log(authorName);
+    // Otteniamo la stringa con le iniziali dell'autore.
+    const nameComponents = authorName.split(" ");
+    console.log(nameComponents);
+
+    // Preparo la variabile che conterrà le iniziali.
+    let initials = "";
+    // Per ogni elemento dell'array creato, estraiamo la prima lettera e la concateniamo.
+    nameComponents.forEach(name => {
+        const firstLetter = name[0];
+        initials += firstLetter;
+    });
+    console.log(initials);
+    // Creiamo la stringa dell'elemento dom.
+    const placeholder = `
+        <div class = "profile-pic-default"
+            <span>${initials}<span>
+        </div>`;
+    
+    return placeholder;
 }
