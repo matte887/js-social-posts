@@ -33,7 +33,7 @@ const posts = [
             image: "https://picsum.photos/id/1005/300"
         },
         likes: 80,
-        created: "05-03-2022"
+        created: "2022-03-05"
     },
     {
         id: 2,
@@ -44,7 +44,7 @@ const posts = [
             image: "https://picsum.photos/id/1011/300"
         },
         likes: 160,
-        created: "05-03-2022"
+        created: "2022-03-05"
     },
     {
         id: 3,
@@ -55,7 +55,7 @@ const posts = [
             image: null
         },
         likes: 160,
-        created: "05-03-2022"
+        created: "2022-03-05"
     }
 ];
 
@@ -93,6 +93,9 @@ likeButtons.forEach( (button, index) => {
         // Salvo i post a cui è stato dato like in un array.
         likedPosts.push(clickedPost);
         console.log(likedPosts);
+
+        // Salvo dentro l'array il numero di likes aggiornato.
+        clickedPost.likes = likesNumber;
 
         // METODO CON dataset (CHE NON ABBIAMO FATTO) PER ESTRARRE L'ID
         // Seleziono l'id del bottone del like per poter cambiare il relativo contatore.
@@ -152,4 +155,24 @@ function createNewDomElement(object) {
                         </div>`;
 
     return domElement;
+}
+
+/**
+ * Description: la funzione trasforma la data in formato americano (yyyy-mm-dd) in formato italiano.
+ * @param {string} originalDate -> è la data in formato americano.
+ * @returns {string} -> data in formato italiano.
+ */
+// Per fare questo usiamo split() per dividere la stringa e trasformarla in un array. Poi usiamo reverse che inverte l'ordine dell'array e poi join per riunire gli elementi dell'array in una stringa.
+function formatDate(originalDate) {
+    // METODO PASSO PASSO
+    // const originalDateArray = originalDate.split("-");
+    // console.log(originalDateArray);
+    // const reversedDateArray = originalDateArray.reverse();
+    // console.log(reversedDateArray);
+    // const italianDateString = reversedDateArray.join("/");
+
+    // METODO IN UNA RIGA
+    const italianDateString = originalDate.split("-").reverse().join("/");
+    
+    return italianDateString;
 }
