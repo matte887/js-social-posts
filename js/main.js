@@ -76,8 +76,6 @@ const likeButtons = document.querySelectorAll(".js-like-button");
 likeButtons.forEach( (button, index) => {
     button.addEventListener("click", function(event){
         event.preventDefault();
-        // Coloro il bottone aggiungendo la classe.
-        this.classList.add("like-button--liked");
 
         // Estraggo l'id dall'oggetto alla posizione index dell'array.
         const clickedPost = posts[index].id;
@@ -85,24 +83,41 @@ likeButtons.forEach( (button, index) => {
         const likeCounter = document.getElementById(`like-counter-${clickedPost}`);
         // Prelevo il contenuto del counter (che è una stringa) e lo strasformo in numero.
         let likesNumber = parseInt(likeCounter.textContent);
-        // Incremento di uno il contatore.
-        likesNumber++;
+
+        if (!likedPosts.includes(clickedPost)) {
+            // Coloro il bottone aggiungendo la classe.
+            this.classList.add("like-button--liked");
+    
+            // Incremento di 1 il contatore.
+            likesNumber++;
+    
+            // Salvo i post a cui è stato dato like in un array.
+            likedPosts.push(clickedPost);
+            
+            
+            // METODO CON dataset (CHE NON ABBIAMO FATTO) PER ESTRARRE L'ID
+            // Seleziono l'id del bottone del like per poter cambiare il relativo contatore.
+            // const postId = this.dataset.postid;
+            // Seleziono anche il counter con id che contiene lo stesso numero di postId.
+            // let counterId = document.getElementById(`like-counter-${postId}`);
+            // counterId.textContent = parseInt(counterId.textContent) + 1;
+
+        } else {
+            // Togliere il colore al bottone
+            this.classList.remove("like-button--liked");
+            
+            // Decrementare il numeo di like
+            likesNumber--;
+            
+            // Togliere l'id del post dall'array likedPosts
+            const idIndexInLikedPosts = likedPosts.indexOf(clickedPost);
+            likedPosts.splice(idIndexInLikedPosts, 1)
+        }
         // Riscrivo il contenuto dell'HTML.
         likeCounter.innerHTML = likesNumber
-
-        // Salvo i post a cui è stato dato like in un array.
-        likedPosts.push(clickedPost);
-        console.log(likedPosts);
-
         // Salvo dentro l'array il numero di likes aggiornato.
         clickedPost.likes = likesNumber;
-
-        // METODO CON dataset (CHE NON ABBIAMO FATTO) PER ESTRARRE L'ID
-        // Seleziono l'id del bottone del like per poter cambiare il relativo contatore.
-        // const postId = this.dataset.postid;
-        // Seleziono anche il counter con id che contiene lo stesso numero di postId.
-        // let counterId = document.getElementById(`like-counter-${postId}`);
-        // counterId.textContent = parseInt(counterId.textContent) + 1;
+        console.log(likedPosts);
     });    
 });
 
