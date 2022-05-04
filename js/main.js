@@ -205,10 +205,8 @@ function createAuthorImage(authorObject) {
 
 // Restituisce l'elemento di placeholder
 function createPlaceholderAuthorImage(authorName) {
-    console.log(authorName);
     // Otteniamo la stringa con le iniziali dell'autore.
     const nameComponents = authorName.split(" ");
-    console.log(nameComponents);
 
     // Preparo la variabile che conterrà le iniziali.
     let initials = "";
@@ -217,7 +215,6 @@ function createPlaceholderAuthorImage(authorName) {
         const firstLetter = name[0];
         initials += firstLetter;
     });
-    console.log(initials);
     // Creiamo la stringa dell'elemento dom.
     const placeholder = `
         <div class = "profile-pic-default"
