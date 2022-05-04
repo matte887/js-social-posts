@@ -131,7 +131,7 @@ function createNewDomElement(object) {
                                     </div>
                                     <div class="post-meta__data">
                                         <div class="post-meta__author">${author.name}</div>
-                                        <div class="post-meta__time">${created}</div>
+                                        <div class="post-meta__time">${formatDate(created)}</div>
                                     </div>                    
                                 </div>
                             </div>
